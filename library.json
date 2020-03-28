@@ -1,0 +1,24 @@
+{
+  "name": "BH1750FVI",
+  "keywords": "BH1750FVI, Lux, light, GY-30",
+  "description": "Arduino library for BH1750FVI (GY-30) lux sensor.",
+  "authors":
+  [
+    {
+      "name": "Rob Tillaart",
+      "email": "Rob.Tillaart@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobTillaart/BH1750FVI.git"
+  },
+  "version": "0.1.1",
+  "frameworks": "arduino",
+  "platforms": "*",
+  "export": {
+    "include": "BH1750FVI"
+  }
+}
