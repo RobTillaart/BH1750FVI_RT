@@ -2,7 +2,7 @@
 																																												//
 //    FILE: BH1750FVI_H.h
 //  AUTHOR: Rob dot Tillaart at gmail dot com
-// VERSION: 0.1.1
+// VERSION: 0.1.2
 // PURPOSE: Arduino library for BH1750FVI (GY-30) lux sensor
 // HISTORY: See BH1750FVI.cpp
 //
@@ -26,7 +26,7 @@
 #include "Wire.h"
 #include "Arduino.h"
 
-#define BH1750FVI_LIB_VERSION       "0.1.1"
+#define BH1750FVI_LIB_VERSION       "0.1.2"
 #define BH1750FVI_DEFAULT_ADDRESS   0x23
 #define BH1750FVI_ALT_ADDRESS		0x5C
 

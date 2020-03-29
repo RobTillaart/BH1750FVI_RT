@@ -1,12 +1,13 @@
 //
 //    FILE: BH1750FVI.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.1
+// VERSION: 0.1.2
 // PURPOSE: library for BH1750FVI lux sensor Arduino
 //     URL: https://github.com/RobTillaart/BH1750FVI
 //
 // 0.1.0	2020-02-02  initial version
 // 0.1.1	2020-03-28  refactor
+// 0.1.2	2020-03-29  unique name in repo, and new release tag.
 //
 
 #include "BH1750FVI.h"
