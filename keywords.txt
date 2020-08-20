@@ -4,6 +4,8 @@
 BH1750FVI	KEYWORD1
 
 # Methods and Functions (KEYWORD2)
+
+getRaw	KEYWORD2
 getLux	KEYWORD2
 getError	KEYWORD2
 
@@ -17,6 +19,7 @@ setContLowRes	KEYWORD2
 setOnceHighRes	KEYWORD2
 setOnceHigh2Res	KEYWORD2
 setOnceLowRes	KEYWORD2
+isReady	KEYWORD2
 
 changeTiming	KEYWORD2
 setCorrectionFactor	KEYWORD2
