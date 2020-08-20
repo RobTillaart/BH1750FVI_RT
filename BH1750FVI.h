@@ -58,7 +58,7 @@ public:
 
 #if defined(ESP8266) || defined(ESP32)
   // dataPin and clockPin can be used for ESP8266
-  BH1750FVI(const uint8_t address , const uint8_t dataPin = 255, const uint8_t clockPin = 255);
+  BH1750FVI(const uint8_t address , const uint8_t dataPin, const uint8_t clockPin);
 #endif
 
   BH1750FVI(const uint8_t address, TwoWire *wire = &Wire);
