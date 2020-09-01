@@ -34,7 +34,7 @@ Library was tested with a breakout board.
 //      +-----------------------+
 //  GND |o                      |
 //  ADD |o                      |
-//  SDA |o                      |
+//  SDA |o            +         |  + = sensor
 //  SCL |o                      |
 //  VCC |o                      |
 //      +-----------------------+
@@ -69,42 +69,60 @@ This is based on a calculated time, the sensor does not have a means to indicate
 Needed only for the single shot modi.
 The function **isReady()** takes the correctionfactor into account.
 
+**CorrectionFactor**
+
 Please read datasheet P11 about details of the correction factor.
 - **changeTiming(uint8_t val)** 69 is default = BH1750FVI_REFERENCE_TIME
 - **setCorrectionFactor(float f)** prefered wrapper around changeTiming f = 0.45 .. 3.68
 - **getCorrectionFactor()** returns the correction factor.
 Note this can differ as it is stores as an integer internally.
 
+**Angle sensitivity**
+
+Note: experimental - use carefully
+
+The lux sensor is really sensitive for the angle of the light.
+If one makes measurements outside, the position of the sun changes
+during the day. The **setAngle(degrees)** function provides a mean to correct that.
+
+The angle adjustments is based upon the figure 4 and 5 (directional characteristics.)
+which describe **Lambert’s Cosine Law**. (details see  wikipedia)
+So the correction factor is ```factor = 1.0 / cos(angle)```.
+At 90 degrees it would fail (divide by zero) so the input is constrained
+to angles between -89 - +89 degrees.
+
+If the light is perpendicular on the sensor the angle to use is 0 degrees.
+Light coming from the side is 90 degrees.
+
+- **setAngle(int degrees)** adjust the lux to incoming angle in dgrees
+- **getAngle()** returns set angle in degrees, 0 by default is perpendicular
+
+
 ## Ideas
 
-**Angle sensitivity**
-The lux sensor is really sensitive for the angle of the light. If one makes measurements
-outside the position of the sun changes during the day and this function could provide
-means to correct that.
-- **setAngle(x, y)** add an angle correction factor (datasheet p3, fig 4&5)
-This involves 2 angles with very similar characteristic.
-- **getAngleX()** **getAngleY()**
-- **getAngleFactor()** returns cumulative effect 0..1
-
 **Spectral Sensitivity**
+
 Spectral sensitivity is quite substantial. (datasheet p3, fig 1)
 Can be used for correction of light filters.
 - **void setSpectral(int wavelength)** set wavelength ==> not linear, lookuptable?
 - **int getSpectral()** returns wavelength
 
 **Temperature Sensitivity**
+
 The reference temperature of the sensor = 20°C.
 The effect of temperature is small 2.5% per 60°C ==> 1% per 24°C
-so only on either a hot roof or on a icy cold day the effect is
+so only on either a hot roof or on a icy cold day the effect is measurable.
 - **setTemperature(int T)** (datasheet P3 fig7)
 - **getTemperature()** returns T
 
 **Intelligent isReady()**
-After a **getLux()** call one can clean the dataregister explicitly with **reset()**.
-Then a call to **isReady()** fetches data and as long as data equals zero the sensor is 
-not ready.
+
+After a **getLux()** call one can clean the dataregister explicitly with
+**reset()**. Then a call to **isReady()** fetches data and as long as
+data equals zero the sensor is not ready.
 
 **DVI interface**
+
 To investigate, sort of external reset?
 
 

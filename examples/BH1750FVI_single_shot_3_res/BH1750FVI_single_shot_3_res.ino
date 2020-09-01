@@ -5,8 +5,6 @@
 // PURPOSE: demo of BH1750FVI lux scanner library
 //    DATE: 2020-08-20
 //
-// Released to the public domain
-//
 
 #include "BH1750FVI.h"
 

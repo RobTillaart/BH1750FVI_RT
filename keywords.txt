@@ -25,6 +25,9 @@ changeTiming	KEYWORD2
 setCorrectionFactor	KEYWORD2
 getCorrectionFactor	KEYWORD2
 
+setAngle	KEYWORD2
+getAngle	KEYWORD2
+
 # Instances (KEYWORD2)
 
 # Constants (LITERAL1)
