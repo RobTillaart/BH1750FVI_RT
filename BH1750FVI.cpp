@@ -1,7 +1,7 @@
 //
 //    FILE: BH1750FVI.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.0
+// VERSION: 0.2.1
 // PURPOSE: library for BH1750FVI lux sensor Arduino
 //     URL: https://github.com/RobTillaart/BH1750FVI
 //
@@ -12,7 +12,7 @@
 // 0.1.4    2020-08-14  cleanup tabs/spaces;
 // 0.2.0    2020-08-18  implement logic for LOW & HIGH2;
 //                      implement correctionfactor;  examples;
-//
+// 0.2.1    2020-08-31  implement angle factor
 
 #include "BH1750FVI.h"
 
@@ -67,13 +67,19 @@ float BH1750FVI::getLux(void)
   // lux without mode correction
   float lux = getRaw();
 
+  // sensitivity factor
   if (_factor != BH1750FVI_REFERENCE_TIME)
   {
-    // sensitivity factor
     lux *= (1.0 * BH1750FVI_REFERENCE_TIME) / _factor;
   }
-
-  if (_mode == BH1750FVI_MODE_HIGH2) lux *= 0.5;  // P11
+  if (_angleFactor != 1.0)
+  {
+    lux *= _angleFactor;
+  }
+  if (_mode == BH1750FVI_MODE_HIGH2)
+  {
+    lux *= 0.5;  // P11
+  }
 
   return lux;
 }
@@ -151,8 +157,8 @@ void BH1750FVI::changeTiming(uint8_t val)
 
 void BH1750FVI::setCorrectionFactor(float f)
 {
-  // 31 .. 254 are range P11
-  uint8_t timingValue = round(BH1750FVI_REFERENCE_TIME * constrain(f, 0.45, 3.68));
+  // 31 .. 254 are range P11 - constrained in changeTIming call
+  uint8_t timingValue = round(BH1750FVI_REFERENCE_TIME * f);
   changeTiming(timingValue);
 }
 
@@ -160,6 +166,13 @@ float BH1750FVI::getCorrectionFactor()
 {
   float f = 1.0 / BH1750FVI_REFERENCE_TIME;
   return _factor * f;
+}
+
+void BH1750FVI::setAngle(int degrees)
+{
+  _angle = constrain(degrees, -89, 89);
+  // Lamberts Law.
+  _angleFactor = 1.0 / cos(_angle * (PI / 180.0));
 }
 
 

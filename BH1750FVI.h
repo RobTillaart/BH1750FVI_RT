@@ -2,7 +2,7 @@
 //
 //    FILE: BH1750FVI_H.h
 //  AUTHOR: Rob dot Tillaart at gmail dot com
-// VERSION: 0.2.0
+// VERSION: 0.2.1
 // PURPOSE: Arduino library for BH1750FVI (GY-30) lux sensor
 // HISTORY: See BH1750FVI.cpp
 //
@@ -13,7 +13,7 @@
 //      +-----------------------+
 //  GND |o                      |
 //  ADD |o                      |
-//  SDA |o                      |
+//  SDA |o            +         |  + = sensor
 //  SCL |o                      |
 //  VCC |o                      |
 //      +-----------------------+
@@ -26,7 +26,7 @@
 #include "Wire.h"
 #include "Arduino.h"
 
-#define BH1750FVI_LIB_VERSION       "0.2.0"
+#define BH1750FVI_LIB_VERSION       "0.2.1"
 #define BH1750FVI_DEFAULT_ADDRESS   0x23
 #define BH1750FVI_ALT_ADDRESS       0x5C
 
@@ -93,18 +93,25 @@ public:
   void    setCorrectionFactor(float f);         // 0.45 .. 3.68
   float   getCorrectionFactor();
 
+  // read datasheet P3 and check figure 4 and 5.
+  // setAngle is constrained to -89..+89
+  void    setAngle(int degrees);
+  int     getAngle() { return _angle; };
+
 private:
-  uint16_t    readData();
-  void        command(uint8_t value);
+  uint16_t  readData();
+  void      command(uint8_t value);
 
-  uint8_t     _address;
-  uint16_t    _data;
-  int         _error;
-  uint8_t     _factor;
-  uint8_t     _mode;
-  uint32_t    _requestTime = 0;
+  uint8_t   _address;
+  uint16_t  _data;
+  int       _error;
+  uint8_t   _factor;     // todo refactor name?
+  uint8_t   _mode;
+  uint32_t  _requestTime = 0;
+  float     _angleFactor = 1;
+  int       _angle;
 
-  TwoWire*    _wire;
+  TwoWire*  _wire;
 };
 
 // -- END OF FILE --
