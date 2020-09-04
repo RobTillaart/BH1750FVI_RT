@@ -2,7 +2,7 @@
 //
 //    FILE: BH1750FVI_H.h
 //  AUTHOR: Rob dot Tillaart at gmail dot com
-// VERSION: 0.2.1
+// VERSION: 0.2.2
 // PURPOSE: Arduino library for BH1750FVI (GY-30) lux sensor
 // HISTORY: See BH1750FVI.cpp
 //
@@ -26,7 +26,7 @@
 #include "Wire.h"
 #include "Arduino.h"
 
-#define BH1750FVI_LIB_VERSION       "0.2.1"
+#define BH1750FVI_LIB_VERSION       "0.2.2"
 #define BH1750FVI_DEFAULT_ADDRESS   0x23
 #define BH1750FVI_ALT_ADDRESS       0x5C
 
@@ -97,6 +97,13 @@ public:
   // setAngle is constrained to -89..+89
   void    setAngle(int degrees);
   int     getAngle() { return _angle; };
+  
+  // datasheet P3 figure 7
+  // Effect of temperature is about 3% / 60°C ~~ 1% / 20°C
+  // to be used if temp is really hot or cold.
+  void    setTemperature(int temp) { _temp = temp; };
+  int     getTemperature() { return _temp; };
+
 
 private:
   uint16_t  readData();
@@ -109,7 +116,8 @@ private:
   uint8_t   _mode;
   uint32_t  _requestTime = 0;
   float     _angleFactor = 1;
-  int       _angle;
+  int       _angle = 0;
+  int       _temp = 20;
 
   TwoWire*  _wire;
 };

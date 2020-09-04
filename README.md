@@ -97,8 +97,18 @@ Light coming from the side is 90 degrees.
 - **setAngle(int degrees)** adjust the lux to incoming angle in dgrees
 - **getAngle()** returns set angle in degrees, 0 by default is perpendicular
 
+**Temperature Compensation**
+
+The reference temperature of the sensor = 20°C.
+The effect of temperature is small, about 3% per 60°C ==> 1% per 20°C
+so only on either a hot roof or on a icy cold day the effect is measurable.
+
+- **setTemperature(int T)**  see datasheet P3 fig7
+- **getTemperature()** returns temperature set, default = 20°C
+
 
 ## Ideas
+
 
 **Spectral Sensitivity**
 
@@ -107,13 +117,6 @@ Can be used for correction of light filters.
 - **void setSpectral(int wavelength)** set wavelength ==> not linear, lookuptable?
 - **int getSpectral()** returns wavelength
 
-**Temperature Sensitivity**
-
-The reference temperature of the sensor = 20°C.
-The effect of temperature is small 2.5% per 60°C ==> 1% per 24°C
-so only on either a hot roof or on a icy cold day the effect is measurable.
-- **setTemperature(int T)** (datasheet P3 fig7)
-- **getTemperature()** returns T
 
 **Intelligent isReady()**
 
