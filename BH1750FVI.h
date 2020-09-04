@@ -2,7 +2,7 @@
 //
 //    FILE: BH1750FVI_H.h
 //  AUTHOR: Rob dot Tillaart at gmail dot com
-// VERSION: 0.2.2
+// VERSION: 0.2.3
 // PURPOSE: Arduino library for BH1750FVI (GY-30) lux sensor
 // HISTORY: See BH1750FVI.cpp
 //
@@ -26,7 +26,7 @@
 #include "Wire.h"
 #include "Arduino.h"
 
-#define BH1750FVI_LIB_VERSION       "0.2.2"
+#define BH1750FVI_LIB_VERSION       "0.2.3"
 #define BH1750FVI_DEFAULT_ADDRESS   0x23
 #define BH1750FVI_ALT_ADDRESS       0x5C
 
@@ -86,7 +86,7 @@ public:
   void    setOnceLowRes();
   bool    isReady();          // only after setOnce...Res();
 
-  // read datasheet P11 about details of the correction factor
+  // read datasheet P11 about details of the correction or sensitivity factor
   // to be used for very high and very low brightness
   // or to correct for e.g. transparancy
   void    changeTiming(uint8_t val);            // 69 is default = BH1750FVI_REFERENCE_TIME
@@ -105,6 +105,12 @@ public:
   int     getTemperature() { return _temp; };
 
 
+  // datasheet Page 3 figure 1  (experimental correction)
+  // Effect of wavelength can be substantial, 
+  // correctionfactor is calculated by multiple linear approximations.
+  void    setWaveLength(int waveLength);
+  int     getWaveLength() { return _waveLength; };
+
 private:
   uint16_t  readData();
   void      command(uint8_t value);
@@ -112,12 +118,14 @@ private:
   uint8_t   _address;
   uint16_t  _data;
   int       _error;
-  uint8_t   _factor;     // todo refactor name?
+  uint8_t   _sensitivityFactor;
   uint8_t   _mode;
   uint32_t  _requestTime = 0;
   float     _angleFactor = 1;
   int       _angle = 0;
   int       _temp = 20;
+  float     _waveLengthFactor = 1;
+  int       _waveLength = 580;
 
   TwoWire*  _wire;
 };

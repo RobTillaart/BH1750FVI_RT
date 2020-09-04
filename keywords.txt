@@ -27,9 +27,10 @@ getCorrectionFactor	KEYWORD2
 
 setAngle	KEYWORD2
 getAngle	KEYWORD2
-
 setTemperature	KEYWORD2
 getTemperature	KEYWORD2
+setWaveLength	KEYWORD2
+getWaveLength	KEYWORD2
 
 # Instances (KEYWORD2)
 
