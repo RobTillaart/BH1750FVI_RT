@@ -1,7 +1,7 @@
 //
 //    FILE: BH1750FVI.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.1
+// VERSION: 0.2.2
 // PURPOSE: library for BH1750FVI lux sensor Arduino
 //     URL: https://github.com/RobTillaart/BH1750FVI
 //
@@ -13,6 +13,7 @@
 // 0.2.0    2020-08-18  implement logic for LOW & HIGH2;
 //                      implement correctionfactor;  examples;
 // 0.2.1    2020-08-31  implement angle factor
+// 0.2.2    2020-09-04  implement temperature compensation
 
 #include "BH1750FVI.h"
 
@@ -59,7 +60,7 @@ bool BH1750FVI::isReady()
 
 float BH1750FVI::getRaw(void)
 {
-  return readData() * 0.833333333333;    // == 1 / 1.2;
+  return readData() * 0.833333333333f;    // == 1 / 1.2;
 }
 
 float BH1750FVI::getLux(void)
@@ -72,9 +73,16 @@ float BH1750FVI::getLux(void)
   {
     lux *= (1.0 * BH1750FVI_REFERENCE_TIME) / _factor;
   }
-  if (_angleFactor != 1.0)
+  // angle compensation
+  if (_angle != 0)
   {
     lux *= _angleFactor;
+  }
+  // temperature compensation.
+  if (_temp != 20)
+  {
+    float tempFactor = 1.0 - (_temp - 20.0) / 2000.0;
+    lux *= tempFactor;
   }
   if (_mode == BH1750FVI_MODE_HIGH2)
   {

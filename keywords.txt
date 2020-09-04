@@ -28,6 +28,9 @@ getCorrectionFactor	KEYWORD2
 setAngle	KEYWORD2
 getAngle	KEYWORD2
 
+setTemperature	KEYWORD2
+getTemperature	KEYWORD2
+
 # Instances (KEYWORD2)
 
 # Constants (LITERAL1)
