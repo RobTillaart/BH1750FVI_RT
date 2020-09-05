@@ -107,16 +107,35 @@ so only on either a hot roof or on a icy cold day the effect is measurable.
 - **getTemperature()** returns temperature set, default = 20°C
 
 
-## Ideas
+**Spectral Compensation ! EXPERIMENTAL !**
 
+Spectral compensation is experimental and not tested. It is a compensation based upon the 
+graph figure 1, page 3 of the datasheet. If one has light of a known wavelength one can 
+compensate for it by setting the wavelength. It can also be used when using filters. 
+As said it is not tested so use at your own risk, but I am interested in your experiences
+if you do real tests with it.
 
-**Spectral Sensitivity**
-
-Spectral sensitivity is quite substantial. (datasheet p3, fig 1)
-Can be used for correction of light filters.
-- **void setSpectral(int wavelength)** set wavelength ==> not linear, lookuptable?
+- **void setSpectral(int wavelength)** set wavelength,
 - **int getSpectral()** returns wavelength
 
+As the graph (figure 1) is not lineair it is approximated by linear interpolation with the 
+following six points.
+
+| WaveLength | Perc % |
+|:----|:----:|
+| 400 |   1 |
+| 440 |  10 |
+| 510 |  90 |
+| 545 |  80 |
+| 580 | 100 |
+| 700 |  07 |
+| 725 |   1 |
+
+Values outside the range will be mapped upon 400 or 715. 
+Default wavelength will be 580 as that gives 100%
+
+
+## Ideas
 
 **Intelligent isReady()**
 
