@@ -1,20 +1,20 @@
 //
 //    FILE: BH1750FVI_angle_measurement.ino
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.0
+// VERSION: 0.1.1
 // PURPOSE: demo of BH1750FVI lux scanner library
 //    DATE: 2020-08-31
 //
 
 /*
    BH1750FVI_angle_measurement
-   
+
    Experimental application
 
    first take a reference measurement for 5 seconds
    holding the sensor flat under a light source.
 
-   Then take a second reference for 5 seconds 
+   Then take a second reference for 5 seconds
    holding the sensor at 90 degrees.
 
    Thereafter hold the sensor at any angle and the
@@ -22,7 +22,7 @@
    Lux level compared to the references.
 
    First trials are not not too bad, roughly within 15° accuracy
-   
+
 */
 
 #include "BH1750FVI.h"
@@ -75,9 +75,12 @@ void loop()
 {
   float val = measure(1, false);
 
-  val = map(val, ref2, ref1, 0, ref1);
+  val = map(val, ref2, ref1, 0, ref1);    // does not constrain...
 
-  float f = min(val / ref1, 1); // prevent NAN
+  // prevent NAN
+  float f = val / ref1;    // map to 0..1 
+  if (f > 1) f = 1;        // constrain upper
+  if (f < -1) f = -1;      // constrain lower
 
   Serial.print(val, 1);
   Serial.print("\t");
@@ -87,8 +90,5 @@ void loop()
   Serial.print("\t");
   Serial.println();
 }
-
-
-
 
 // -- END OF FILE --

@@ -1,7 +1,7 @@
 //
 //    FILE: BH1750FVI.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.3
+// VERSION: 0.2.4
 // PURPOSE: library for BH1750FVI lux sensor Arduino
 //     URL: https://github.com/RobTillaart/BH1750FVI
 //
@@ -15,18 +15,19 @@
 // 0.2.1    2020-08-31  implement angle factor
 // 0.2.2    2020-09-04  implement temperature compensation
 // 0.2.3    2020-09-04  implement wavelength compensation
+// 0.2.4    2020-11-27  fix #10 rename _sensitivityFactor for ESP32
 
 #include "BH1750FVI.h"
 
 #if defined(ESP8266) || defined(ESP32)
 BH1750FVI::BH1750FVI(const uint8_t address, const uint8_t dataPin, const uint8_t clockPin)
 {
-  _address = address;
-  _data    = 0;
-  _error   = BH1750FVI_OK;
-  _factor  = BH1750FVI_REFERENCE_TIME;
-  _mode    = BH1750FVI_MODE_HIGH;
-  _wire    = &Wire;
+  _address            = address;
+  _data               = 0;
+  _error              = BH1750FVI_OK;
+  _sensitivityFactor  = BH1750FVI_REFERENCE_TIME;
+  _mode               = BH1750FVI_MODE_HIGH;
+  _wire               = &Wire;
 
   if ((dataPin < 255) && (clockPin < 255))
   {
