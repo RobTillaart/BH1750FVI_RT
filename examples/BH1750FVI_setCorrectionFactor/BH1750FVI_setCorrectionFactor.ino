@@ -1,7 +1,7 @@
 //
 //    FILE: setCorrectionFactor.ino
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.0
+// VERSION: 0.1.1
 // PURPOSE: demo of BH1750FVI lux scanner library
 //    DATE: 2020-02-02
 //
@@ -29,7 +29,7 @@ void setup()
 
 void loop()
 {
-  int interval = 180;              // max time see datasheet P2
+  uint16_t interval = 180;              // max time see datasheet P2
   if (millis() - lastUpdate >= interval)
   {
     lastUpdate += interval;
