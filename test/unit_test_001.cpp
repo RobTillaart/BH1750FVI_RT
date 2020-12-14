@@ -43,7 +43,9 @@ unittest(test_constructor)
   assertEqual(1, myLux.getMode());
   myLux.setContLowRes();
   assertEqual(0, myLux.getMode());
-  
+
+  assertFalse(myLux.isReady());
+
   myLux.setOnceHigh2Res();
   assertEqual(2, myLux.getMode());
   myLux.setOnceHighRes();
@@ -51,6 +53,7 @@ unittest(test_constructor)
   myLux.setOnceLowRes();
   assertEqual(0, myLux.getMode());
 
+  assertFalse(myLux.isReady());
 }
 
 
@@ -59,10 +62,8 @@ unittest(test_read)
   BH1750FVI myLux(0x23);
 
   assertEqual(0, myLux.getError());
-
-  // TODO
-  // float getRaw()
-  // float getLux()
+  assertEqual(0, myLux.getRaw());
+  assertEqual(0, myLux.getLux());
 }
 
 
@@ -72,8 +73,10 @@ unittest(test_parameters)
   BH1750FVI myLux(0x23);
 
   // 0.45 .. 3.68
+  fprintf(stderr, "myLux.getCorrectionFactor()\n");
   myLux.setCorrectionFactor(3.14);
-  assertEqual(3.14, myLux.getCorrectionFactor());
+  float diff = abs(3.14 - myLux.getCorrectionFactor());
+  assertEqual(0, diff);
 
   // -89 - 89
   myLux.setAngle(30);
@@ -82,9 +85,6 @@ unittest(test_parameters)
   // 
   myLux.setTemperature(42);
   assertEqual(42, myLux.getTemperature());
-
-  myLux.setCorrectionFactor(3.14);
-  assertEqual(3.14, myLux.getCorrectionFactor());
 
   // 400 - 715
   myLux.setWaveLength(700);

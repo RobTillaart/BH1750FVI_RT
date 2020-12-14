@@ -120,12 +120,12 @@ private:
   int       _error;
   uint8_t   _sensitivityFactor;
   uint8_t   _mode;
-  uint32_t  _requestTime = 0;
-  float     _angleFactor = 1;
-  int       _angle = 0;
-  int       _temp = 20;
-  float     _waveLengthFactor = 1;
-  int       _waveLength = 580;
+  uint32_t  _requestTime        = 0;
+  float     _angleFactor        = 1;
+  int       _angle              = 0;
+  int       _temp               = 20;
+  float     _waveLengthFactor   = 1;
+  int       _waveLength         = 580;
 
   TwoWire*  _wire;
 };
