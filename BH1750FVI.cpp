@@ -1,7 +1,7 @@
 //
 //    FILE: BH1750FVI.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.4
+// VERSION: 0.2.5
 // PURPOSE: library for BH1750FVI lux sensor Arduino
 //     URL: https://github.com/RobTillaart/BH1750FVI
 //
@@ -16,6 +16,7 @@
 // 0.2.2    2020-09-04  implement temperature compensation
 // 0.2.3    2020-09-04  implement wavelength compensation
 // 0.2.4    2020-11-27  fix #10 rename _sensitivityFactor for ESP32
+// 0.2.5    2020-12-12  add Arduino-CI and unit tests
 
 #include "BH1750FVI.h"
 

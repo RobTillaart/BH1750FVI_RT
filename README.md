@@ -1,3 +1,8 @@
+
+[![Arduino CI](https://github.com/RobTillaart/BH1750FVI_RT/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/BH1750FVI_RT/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/RobTillaart/BH1750FVI_RT.svg?maxAge=3600)](https://github.com/RobTillaart/BH1750FVI_RT/releases)
+
 # BH1750FVI_RT
 
 Arduino library for BH1750FVI (GY-30) 16 bit I2C Lux sensor
