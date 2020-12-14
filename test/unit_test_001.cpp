@@ -76,7 +76,7 @@ unittest(test_parameters)
   fprintf(stderr, "myLux.getCorrectionFactor()\n");
   myLux.setCorrectionFactor(3.14);
   float diff = abs(3.14 - myLux.getCorrectionFactor());
-  assertEqual(0, diff);
+  assertMoreOrEqual(0.01, diff);
 
   // -89 - 89
   myLux.setAngle(30);
