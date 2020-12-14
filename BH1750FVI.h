@@ -1,8 +1,8 @@
 #pragma once
 //
-//    FILE: BH1750FVI_H.h
+//    FILE: BH1750FVI.h
 //  AUTHOR: Rob dot Tillaart at gmail dot com
-// VERSION: 0.2.4
+// VERSION: 0.2.5
 // PURPOSE: Arduino library for BH1750FVI (GY-30) lux sensor
 // HISTORY: See BH1750FVI.cpp
 //
@@ -26,7 +26,7 @@
 #include "Wire.h"
 #include "Arduino.h"
 
-#define BH1750FVI_LIB_VERSION       "0.2.4"
+#define BH1750FVI_LIB_VERSION       "0.2.5"
 #define BH1750FVI_DEFAULT_ADDRESS   0x23
 #define BH1750FVI_ALT_ADDRESS       0x5C
 
@@ -120,12 +120,12 @@ private:
   int       _error;
   uint8_t   _sensitivityFactor;
   uint8_t   _mode;
-  uint32_t  _requestTime = 0;
-  float     _angleFactor = 1;
-  int       _angle = 0;
-  int       _temp = 20;
-  float     _waveLengthFactor = 1;
-  int       _waveLength = 580;
+  uint32_t  _requestTime        = 0;
+  float     _angleFactor        = 1;
+  int       _angle              = 0;
+  int       _temp               = 20;
+  float     _waveLengthFactor   = 1;
+  int       _waveLength         = 580;
 
   TwoWire*  _wire;
 };
