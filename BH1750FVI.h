@@ -2,7 +2,7 @@
 //
 //    FILE: BH1750FVI.h
 //  AUTHOR: Rob dot Tillaart at gmail dot com
-// VERSION: 0.2.5
+// VERSION: 0.2.6
 // PURPOSE: Arduino library for BH1750FVI (GY-30) lux sensor
 // HISTORY: See BH1750FVI.cpp
 //
@@ -23,12 +23,17 @@
 //   1 = 0x5C
 //
 
+
 #include "Wire.h"
 #include "Arduino.h"
 
-#define BH1750FVI_LIB_VERSION       "0.2.5"
+
+#define BH1750FVI_LIB_VERSION       (F("0.2.6"))
+
+
 #define BH1750FVI_DEFAULT_ADDRESS   0x23
 #define BH1750FVI_ALT_ADDRESS       0x5C
+
 
 // COMMANDS P5
 #define BH1750FVI_POWER_ON          0x00
@@ -47,6 +52,7 @@
 #define BH1750FVI_MODE_HIGH         0x01
 #define BH1750FVI_MODE_HIGH2        0x02
 
+
 // ERROR CODES
 #define BH1750FVI_OK                         0
 #define BH1750FVI_ERROR_WIRE_REQUEST         -10
@@ -62,6 +68,9 @@ public:
 #endif
 
   BH1750FVI(const uint8_t address, TwoWire *wire = &Wire);
+  void    begin();       // resets to constructor defaults. (use with care)
+
+  bool    isConnected(); // returns true if address is on I2C bus
 
   float   getRaw();      // no HIGH2 mode + no sensitivity factor.
   float   getLux();
