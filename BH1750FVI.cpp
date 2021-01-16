@@ -1,33 +1,32 @@
 //
 //    FILE: BH1750FVI.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.5
+// VERSION: 0.2.6
 // PURPOSE: library for BH1750FVI lux sensor Arduino
 //     URL: https://github.com/RobTillaart/BH1750FVI
 //
-// 0.1.0    2020-02-02  initial version
-// 0.1.1    2020-03-28  refactor
-// 0.1.2    2020-03-29  unique name in repo, and new release tag.
-// 0.1.3    2020-06-05  fix library.json file
-// 0.1.4    2020-08-14  cleanup tabs/spaces;
-// 0.2.0    2020-08-18  implement logic for LOW & HIGH2;
+//  0.1.0   2020-02-02  initial version
+//  0.1.1   2020-03-28  refactor
+//  0.1.2   2020-03-29  unique name in repo, and new release tag.
+//  0.1.3   2020-06-05  fix library.json file
+//  0.1.4   2020-08-14  cleanup tabs/spaces;
+//  0.2.0   2020-08-18  implement logic for LOW & HIGH2;
 //                      implement correctionfactor;  examples;
-// 0.2.1    2020-08-31  implement angle factor
-// 0.2.2    2020-09-04  implement temperature compensation
-// 0.2.3    2020-09-04  implement wavelength compensation
-// 0.2.4    2020-11-27  fix #10 rename _sensitivityFactor for ESP32
-// 0.2.5    2020-12-12  add Arduino-CI and unit tests
+//  0.2.1   2020-08-31  implement angle factor
+//  0.2.2   2020-09-04  implement temperature compensation
+//  0.2.3   2020-09-04  implement wavelength compensation
+//  0.2.4   2020-11-27  fix #10 rename _sensitivityFactor for ESP32
+//  0.2.5   2020-12-12  add Arduino-CI and unit tests
+//  0.2.6   2021-01-16  add reset()
+
 
 #include "BH1750FVI.h"
+
 
 #if defined(ESP8266) || defined(ESP32)
 BH1750FVI::BH1750FVI(const uint8_t address, const uint8_t dataPin, const uint8_t clockPin)
 {
   _address            = address;
-  _data               = 0;
-  _error              = BH1750FVI_OK;
-  _sensitivityFactor  = BH1750FVI_REFERENCE_TIME;
-  _mode               = BH1750FVI_MODE_HIGH;
   _wire               = &Wire;
 
   if ((dataPin < 255) && (clockPin < 255))
@@ -36,19 +35,37 @@ BH1750FVI::BH1750FVI(const uint8_t address, const uint8_t dataPin, const uint8_t
   } else {
     _wire->begin();
   }
+  begin();
 }
 #endif
+
 
 BH1750FVI::BH1750FVI(const uint8_t address, TwoWire *wire)
 {
   _address            = address;
-  _data               = 0;
-  _error              = BH1750FVI_OK;
-  _sensitivityFactor  = BH1750FVI_REFERENCE_TIME;   // P11
-  _mode               = BH1750FVI_MODE_HIGH;
   _wire               = wire;
   _wire->begin();
+  begin();
 }
+
+
+void BH1750FVI::begin()
+{
+  _data               = 0;
+  _error              = BH1750FVI_OK;
+  _sensitivityFactor  = BH1750FVI_REFERENCE_TIME;
+  _mode               = BH1750FVI_MODE_HIGH;
+
+}
+
+
+bool BH1750FVI::isConnected()
+{
+  _wire->beginTransmission(_address);
+  _error = _wire->endTransmission();
+  return (_error == 0);
+}
+
 
 bool BH1750FVI::isReady()
 {
@@ -62,10 +79,12 @@ bool BH1750FVI::isReady()
   return false;
 }
 
+
 float BH1750FVI::getRaw(void)
 {
   return readData() * 0.833333333333f;    // == 1 / 1.2;
 }
+
 
 float BH1750FVI::getLux(void)
 {
@@ -100,6 +119,7 @@ float BH1750FVI::getLux(void)
 
   return lux;
 }
+
 
 int BH1750FVI::getError()
 {

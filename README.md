@@ -3,9 +3,11 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/BH1750FVI_RT/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/RobTillaart/BH1750FVI_RT.svg?maxAge=3600)](https://github.com/RobTillaart/BH1750FVI_RT/releases)
 
+
 # BH1750FVI_RT
 
 Arduino library for BH1750FVI (GY-30) 16 bit I2C Lux sensor
+
 
 ## Description
 
@@ -28,6 +30,7 @@ Another aplication is to correct the transparancy of material, or the type of li
 
 Note that the typical integration time will differ if the correction factor is changed.
 The **isReady()** an **getLux()** functions keep track of the adjustment needed.
+
 
 ## Interface hardware
 
@@ -52,16 +55,32 @@ Library was tested with a breakout board.
 The sensor works on 2.4 - 3.6 volt so be careful not to connect directly to 5.0 volt.
 (Note: the breakout board was 5 volt tolerant)
 
-## Interface API
+
+## Interface
+
+### Constructor
 
 - **BH1750FVI(address, dataPin, clockPin)**  ESP constructor with I2C parameters
 - **BH1750FVI(address, TwoWire \*wire = &Wire)** constructor for other platforms
+- **begin()** resets some internal vars to default. Use with care.
+
+
+### Base
+
 - **getRaw()** reads the lux sensor,
 - **getLux()** reads the lux sensor and corrects for correctionFactor and for HIGH2 mode,
+
+
+### management
+
 - **getError()** get the latest error, mainly for debugging,
 - **powerOn()** wakes up the sensor,
 - **powerOff()** set sensor to sleep,
 - **reset()** resets the dataregister to 0, effectively removing last measurement.
+
+
+### Mode operators
+
 - **getMode()** gets the mode set by one of the set functions. See table above.
 - **setContHighRes()** continuous mode in HIGH resolution
 - **setContHigh2Res()** continuous mode in HIGH2 resolution
@@ -69,20 +88,23 @@ The sensor works on 2.4 - 3.6 volt so be careful not to connect directly to 5.0 
 - **setOnceHighRes()** single shot mode in HIGH resolution
 - **setOnceHigh2Res()** single shot mode in HIGH2 resolution
 - **setOnceLowRes()** single shot mode in LOW resolution
+
+
+### CorrectionFactor
+
+Please read datasheet P11 about details of the correction factor.
+
 - **isReady()** can be used to check if the sensor is ready.
 This is based on a calculated time, the sensor does not have a means to indicate ready directly.
 Needed only for the single shot modi.
 The function **isReady()** takes the correctionfactor into account.
-
-**CorrectionFactor**
-
-Please read datasheet P11 about details of the correction factor.
 - **changeTiming(uint8_t val)** 69 is default = BH1750FVI_REFERENCE_TIME
 - **setCorrectionFactor(float f)** prefered wrapper around changeTiming f = 0.45 .. 3.68
 - **getCorrectionFactor()** returns the correction factor.
 Note this can differ as it is stores as an integer internally.
 
-**Angle sensitivity**
+
+### Angle sensitivity
 
 Note: experimental - use carefully
 
@@ -102,7 +124,8 @@ Light coming from the side is 90 degrees.
 - **setAngle(int degrees)** adjust the lux to incoming angle in dgrees
 - **getAngle()** returns set angle in degrees, 0 by default is perpendicular
 
-**Temperature Compensation**
+
+### Temperature Compensation
 
 The reference temperature of the sensor = 20°C.
 The effect of temperature is small, about 3% per 60°C ==> 1% per 20°C
@@ -112,7 +135,7 @@ so only on either a hot roof or on a icy cold day the effect is measurable.
 - **getTemperature()** returns temperature set, default = 20°C
 
 
-**Spectral Compensation ! EXPERIMENTAL !**
+### Spectral Compensation ! EXPERIMENTAL !
 
 Spectral compensation is experimental and not tested. It is a compensation based upon the 
 graph figure 1, page 3 of the datasheet. If one has light of a known wavelength one can 
@@ -142,14 +165,13 @@ Default wavelength will be 580 as that gives 100%
 
 ## Ideas
 
-**Intelligent isReady()**
-
+- **Intelligent isReady()**
 After a **getLux()** call one can clean the dataregister explicitly with
 **reset()**. Then a call to **isReady()** fetches data and as long as
 data equals zero the sensor is not ready.
 
-**DVI interface**
 
+- **DVI interface**
 To investigate, sort of external reset?
 
 

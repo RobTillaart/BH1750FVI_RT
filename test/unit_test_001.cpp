@@ -9,20 +9,29 @@
 
 // supported assertions
 // ----------------------------
-// assertEqual(expected, actual)
-// assertNotEqual(expected, actual)
-// assertLess(expected, actual)
-// assertMore(expected, actual)
-// assertLessOrEqual(expected, actual)
-// assertMoreOrEqual(expected, actual)
-// assertTrue(actual)
-// assertFalse(actual)
-// assertNull(actual)
+// assertEqual(expected, actual);               // a == b
+// assertNotEqual(unwanted, actual);            // a != b
+// assertComparativeEquivalent(expected, actual);    // abs(a - b) == 0 or (!(a > b) && !(a < b))
+// assertComparativeNotEquivalent(unwanted, actual); // abs(a - b) > 0  or ((a > b) || (a < b))
+// assertLess(upperBound, actual);              // a < b
+// assertMore(lowerBound, actual);              // a > b
+// assertLessOrEqual(upperBound, actual);       // a <= b
+// assertMoreOrEqual(lowerBound, actual);       // a >= b
+// assertTrue(actual);
+// assertFalse(actual);
+// assertNull(actual);
+
+// // special cases for floats
+// assertEqualFloat(expected, actual, epsilon);    // fabs(a - b) <= epsilon
+// assertNotEqualFloat(unwanted, actual, epsilon); // fabs(a - b) >= epsilon
+// assertInfinity(actual);                         // isinf(a)
+// assertNotInfinity(actual);                      // !isinf(a)
+// assertNAN(arg);                                 // isnan(a)
+// assertNotNAN(arg);                              // !isnan(a)
 
 #include <ArduinoUnitTests.h>
 
 #include "BH1750FVI.h"
-
 
 
 unittest_setup()
