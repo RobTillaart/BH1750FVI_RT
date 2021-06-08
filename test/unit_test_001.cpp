@@ -72,7 +72,6 @@ unittest(test_constants)
 {
   fprintf(stderr, "BH1750FVI_LIB_VERSION: %s\n", BH1750FVI_LIB_VERSION);
 
-  assertEqual(0, myLux.getMode());
   assertEqual(0x23, BH1750FVI_DEFAULT_ADDRESS);
   assertEqual(0x5C, BH1750FVI_ALT_ADDRESS);
 
@@ -114,8 +113,7 @@ unittest(test_parameters)
   // 0.45 .. 3.68
   fprintf(stderr, "myLux.getCorrectionFactor()\n");
   myLux.setCorrectionFactor(3.14);
-  float diff = abs(3.14 - myLux.getCorrectionFactor());
-  assertMoreOrEqual(0.01, diff);
+  assertEqualFloat(3.14, myLux.getCorrectionFactor(), 0.001);
 
   // -89 - 89
   myLux.setAngle(30);
