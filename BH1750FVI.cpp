@@ -197,7 +197,7 @@ void BH1750FVI::changeTiming(uint8_t val)
 }
 
 
-float BH1750FVI::setCorrectionFactor(float f)
+uint8_t BH1750FVI::setCorrectionFactor(float f)
 {
   // 31 .. 254 are range P11 - constrained in changeTIming call
   uint8_t timingValue = round(BH1750FVI_REFERENCE_TIME * f);

@@ -26,7 +26,7 @@ Furthermore one can set a correction factor to reduce / increase the
 integration time of the sensor.
 The factor should be between 0.45 - 3.68.
 It can be used to increase the working range like very bright or very low light conditions.
-Another aplication is to correct the transparancy of material, or the type of light used.
+Another application is to correct the transparency of material, or the type of light used.
 
 Note that the typical integration time will differ if the correction factor is changed.
 The **isReady()** an **getLux()** functions keep track of the adjustment needed.
@@ -62,7 +62,7 @@ The sensor works on 2.4 - 3.6 volt so be careful not to connect directly to 5.0 
 
 - **BH1750FVI(address, dataPin, clockPin)**  ESP constructor with I2C parameters
 - **BH1750FVI(address, TwoWire \*wire = &Wire)** constructor for other platforms
-- **bool begin()** resets some internal vars to default. Use with care.
+- **bool begin()** resets some internal variables to default. Use with care.
 - **bool isConnected()** returns true if address is on I2C bus.
 
 
@@ -77,7 +77,7 @@ The sensor works on 2.4 - 3.6 volt so be careful not to connect directly to 5.0 
 - **int getError()** get the latest error code, mainly for debugging,
 - **void powerOn()** wakes up the sensor,
 - **void powerOff()** set sensor to sleep,
-- **void reset()** resets the dataregister to 0, effectively removing last measurement.
+- **void reset()** resets the data register to 0, effectively removing last measurement.
 
 
 ### Mode operators
@@ -98,9 +98,10 @@ Please read datasheet P11 about details of the correction factor.
 - **bool isReady()** can be used to check if the sensor is ready.
 This is based on a calculated time, the sensor does not have a means to indicate ready directly.
 Needed only for the single shot modi.
-The function **isReady()** takes the correctionfactor into account.
+The function **isReady()** takes the correction factor into account.
 - **void changeTiming(uint8_t val)** 69 is default = BH1750FVI_REFERENCE_TIME
-- **uint8_t setCorrectionFactor(float f = 1)** prefered wrapper around changeTiming f = 0.45 .. 3.68.  Returns changeTiming() param
+- **uint8_t setCorrectionFactor(float f = 1)** preferred wrapper around changeTiming f = 0.45 .. 3.68.  
+Returns changeTiming() parameter.
 - **float getCorrectionFactor()** returns the correction factor.
 Note this can differ as it is stores as an integer internally.
 
@@ -114,7 +115,7 @@ If one makes measurements outside, the position of the sun changes
 during the day. The **setAngle(degrees)** function provides a mean to correct that.
 
 The angle adjustments is based upon the figure 4 and 5 (directional characteristics.)
-which describe **Lambert’s Cosine Law**. (details see  wikipedia)
+which describe **Lambert’s Cosine Law**. (details see  Wikipedia)
 So the correction factor is ```factor = 1.0 / cos(angle)```.
 At 90 degrees it would fail (divide by zero) so the input is constrained
 to angles between -89 - +89 degrees.
@@ -147,7 +148,7 @@ if you do real tests with it.
 - **float setWaveLength(int wavelength = 580)** set wavelength, returns the wavelength correction factor.
 - **int getWaveLength()** returns set wavelength
 
-As the graph (figure 1) is not lineair it is approximated by linear interpolation with the 
+As the graph (figure 1) is not linear it is approximated by linear interpolation with the 
 following six points.
 
 | WaveLength | Perc % |
@@ -167,7 +168,7 @@ Default wavelength will be 580 as that gives 100%
 ## Ideas
 
 - **Intelligent isReady()**
-After a **getLux()** call one can clean the dataregister explicitly with
+After a **getLux()** call one can clean the data register explicitly with
 **reset()**. Then a call to **isReady()** fetches data and as long as
 data equals zero the sensor is not ready.
 
