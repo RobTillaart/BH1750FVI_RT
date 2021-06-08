@@ -216,7 +216,8 @@ float BH1750FVI::getCorrectionFactor()
 float BH1750FVI::setTemperature(int temp)
 {
   _temp = temp;
-  _tempFactor = 1.0f - (_temp - 20.0f) / 2000.0f;
+  // _tempFactor = 1.0f - (_temp - 20.0f) / 2000.0f;
+  _tempFactor = 1.0f - (_temp - 20.0f) * 0.0005f;
   return _tempFactor;
 }
 

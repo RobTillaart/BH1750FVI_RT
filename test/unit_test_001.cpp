@@ -167,19 +167,19 @@ unittest(test_temperatureFactor)
   BH1750FVI myLux(0x23);
 
   // -20 .. 100
-  assertEqualFloat(1.0200, myLux.setTemperature(-20), 0.0001);
-  assertEqualFloat(0.0000, myLux.setTemperature(-10), 0.0001);
-  assertEqualFloat(0.0000, myLux.setTemperature(  0), 0.0001);
-  assertEqualFloat(0.0000, myLux.setTemperature( 10), 0.0001);
-  assertEqualFloat(0.0000, myLux.setTemperature( 20), 0.0001);
-  assertEqualFloat(0.0000, myLux.setTemperature( 30), 0.0001);
-  assertEqualFloat(0.0000, myLux.setTemperature( 40), 0.0001);
-  assertEqualFloat(0.0000, myLux.setTemperature( 50), 0.0001);
-  assertEqualFloat(0.0000, myLux.setTemperature( 60), 0.0001);
-  assertEqualFloat(0.0000, myLux.setTemperature( 70), 0.0001);
-  assertEqualFloat(0.0000, myLux.setTemperature( 80), 0.0001);
-  assertEqualFloat(0.9650, myLux.setTemperature( 90), 0.0001);
-  assertEqualFloat(0.9600, myLux.setTemperature(100), 0.0001);
+  assertEqualFloat(1.020, myLux.setTemperature(-20), 0.001);
+  assertEqualFloat(1.015, myLux.setTemperature(-10), 0.001);
+  assertEqualFloat(1.010, myLux.setTemperature(  0), 0.001);
+  assertEqualFloat(1.005, myLux.setTemperature( 10), 0.001);
+  assertEqualFloat(1.000, myLux.setTemperature( 20), 0.001);
+  assertEqualFloat(0.995, myLux.setTemperature( 30), 0.001);
+  assertEqualFloat(0.990, myLux.setTemperature( 40), 0.001);
+  assertEqualFloat(0.985, myLux.setTemperature( 50), 0.001);
+  assertEqualFloat(0.980, myLux.setTemperature( 60), 0.001);
+  assertEqualFloat(0.975, myLux.setTemperature( 70), 0.001);
+  assertEqualFloat(0.970, myLux.setTemperature( 80), 0.001);
+  assertEqualFloat(0.965, myLux.setTemperature( 90), 0.001);
+  assertEqualFloat(0.960, myLux.setTemperature(100), 0.001);
 }
 
 
