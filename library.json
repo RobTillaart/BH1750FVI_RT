@@ -18,5 +18,6 @@
   "version": "0.2.8",
   "license": "MIT",
   "frameworks": "arduino",
-  "platforms": "*"
+  "platforms": "*",
+  "headers": "BH1750FVI.h"
 }
