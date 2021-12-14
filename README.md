@@ -101,7 +101,7 @@ Please read datasheet P11 about details of the correction factor.
 This is based on a calculated time, the sensor does not have a means to indicate ready directly.
 Needed only for the single shot modi.
 The function **isReady()** takes the correction factor into account.
-- **void changeTiming(uint8_t time)** 69 is default = BH1750FVI_REFERENCE_TIME
+- **void changeTiming(uint8_t time = BH1750FVI_REFERENCE_TIME)** 69 is default.
 - **uint8_t setCorrectionFactor(float factor = 1)** preferred wrapper around changeTiming factor = 0.45 .. 3.68.  
 Returns changeTiming() parameter.
 - **float getCorrectionFactor()** returns the correction factor.
