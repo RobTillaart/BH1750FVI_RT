@@ -74,7 +74,7 @@ Note: the breakout board was 5 volt tolerant.
 - **float getLux()** reads the lux sensor and corrects for correctionFactor, mode, temperature and angle.
 
 
-### management
+### Management
 
 - **int getError()** get the latest error code, mainly for debugging.
 - **void powerOn()** wakes up the sensor.
