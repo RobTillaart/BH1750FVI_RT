@@ -50,6 +50,9 @@ unittest(test_constructor)
 {
   BH1750FVI myLux(0x23);
 
+  Wire.begin();
+  myLux.begin();
+
   myLux.setContHigh2Res();
   assertEqual(2, myLux.getMode());
   myLux.setContHighRes();
@@ -90,6 +93,9 @@ unittest(test_read)
 {
   BH1750FVI myLux(0x23);
 
+  Wire.begin();
+  myLux.begin();
+
   assertEqual(0, myLux.getError());
   assertEqual(0, myLux.getRaw());
   assertEqual(0, myLux.getLux());
@@ -99,6 +105,9 @@ unittest(test_read)
 unittest(test_parameters)
 {
   BH1750FVI myLux(0x23);
+
+  Wire.begin();
+  myLux.begin();
 
   //  0.45 .. 3.68
   myLux.setCorrectionFactor(3.14);
@@ -122,6 +131,9 @@ unittest(test_correctionFactor)
 {
   BH1750FVI myLux(0x23);
 
+  Wire.begin();
+  myLux.begin();
+
   //  0.45 .. 3.68
   assertEqual( 31, myLux.setCorrectionFactor(0.00) );
   assertEqual( 31, myLux.setCorrectionFactor(0.44) );
@@ -135,6 +147,9 @@ unittest(test_correctionFactor)
 unittest(test_angleFactor)
 {
   BH1750FVI myLux(0x23);
+
+  Wire.begin();
+  myLux.begin();
 
   //  -89 ..89
   assertEqualFloat(57.2987, myLux.setAngle(-90), 0.0001);
@@ -154,6 +169,9 @@ unittest(test_angleFactor)
 unittest(test_temperatureFactor)
 {
   BH1750FVI myLux(0x23);
+
+  Wire.begin();
+  myLux.begin();
 
   //  -20 .. 100
   assertEqualFloat(1.020, myLux.setTemperature(-20), 0.001);
@@ -176,6 +194,9 @@ unittest(test_wavelengthFactor)
 {
   BH1750FVI myLux(0x23);
 
+  Wire.begin();
+  myLux.begin();
+
   //  400 - 715
   assertEqualFloat(100.000, myLux.setWaveLength(300), 0.001);
   assertEqualFloat(100.000, myLux.setWaveLength(400), 0.001);
@@ -194,4 +215,5 @@ unittest(test_wavelengthFactor)
 
 unittest_main()
 
-// --------
+
+//  -- END OF FILE --
