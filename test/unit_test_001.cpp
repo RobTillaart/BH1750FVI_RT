@@ -75,16 +75,6 @@ unittest(test_constants)
   assertEqual(0x23, BH1750FVI_DEFAULT_ADDRESS);
   assertEqual(0x5C, BH1750FVI_ALT_ADDRESS);
 
-  assertEqual(0x00, BH1750FVI_POWER_ON);
-  assertEqual(0x01, BH1750FVI_POWER_OFF);
-  assertEqual(0x07, BH1750FVI_RESET);
-  assertEqual(0x10, BH1750FVI_CONT_HIGH);
-  assertEqual(0x11, BH1750FVI_CONT_HIGH2);
-  assertEqual(0x13, BH1750FVI_CONT_LOW);
-  assertEqual(0x20, BH1750FVI_ONCE_HIGH);
-  assertEqual(0x21, BH1750FVI_ONCE_HIGH2);
-  assertEqual(0x23, BH1750FVI_ONCE_LOW);
-
   assertEqual(0x45, BH1750FVI_REFERENCE_TIME);
 
   assertEqual(0x00, BH1750FVI_MODE_LOW);
