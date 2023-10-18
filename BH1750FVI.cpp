@@ -23,9 +23,12 @@
 
 BH1750FVI::BH1750FVI(const uint8_t address, TwoWire *wire)
 {
-  _address = address;
-  _wire    = wire;
-  begin();
+  _address            = address;
+  _wire               = wire;
+  _data               = 0;
+  _error              = BH1750FVI_OK;
+  _sensitivityFactor  = BH1750FVI_REFERENCE_TIME;
+  _mode               = BH1750FVI_MODE_HIGH;
 }
 
 
