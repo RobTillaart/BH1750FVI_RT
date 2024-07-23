@@ -17,7 +17,7 @@ Arduino library for BH1750FVI (GY-30) 16 bit I2C Lux sensor.
 ## Description
 
 The BH1750FVI is a 16 bit lux sensor with an I2C interface.
-It is possible to detect a wide range from 0.11 - 100000 lux.
+This sensor has a wide working range from 0.11 - 100000 lux.
 
 To be able to support this wide range, the sensor can operate in three modi.
 
@@ -34,7 +34,7 @@ It can be used to increase the working range like very bright or very low light 
 Another application is to correct the transparency of material, or the type of light used.
 
 Note that the typical integration time will differ if the correction factor is changed.
-The **isReady()** an **getLux()** functions keep track of the adjustment needed.
+The **isReady()** and **getLux()** functions keep track of the adjustment needed.
 
 
 ### 0.3.0 Breaking change
