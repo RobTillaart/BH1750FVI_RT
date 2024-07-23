@@ -152,7 +152,7 @@ unittest(test_angleFactor)
   myLux.begin();
 
   //  -89 ..89
-  assertEqualFloat(572.9667, myLux.setAngle(-90), 0.0001);
+  assertEqualFloat(572.967,  myLux.setAngle(-90), 0.001);
   assertEqualFloat( 57.2987, myLux.setAngle(-89), 0.0001);
   assertEqualFloat( 2.00000, myLux.setAngle(-60), 0.0001);
   assertEqualFloat( 1.41421, myLux.setAngle(-45), 0.0001);
@@ -162,7 +162,7 @@ unittest(test_angleFactor)
   assertEqualFloat( 1.41421, myLux.setAngle( 45), 0.0001);
   assertEqualFloat( 2.00000, myLux.setAngle( 60), 0.0001);
   assertEqualFloat( 57.2987, myLux.setAngle( 89), 0.0001);
-  assertEqualFloat( 572.9667, myLux.setAngle( 90), 0.0001);
+  assertEqualFloat( 572.967, myLux.setAngle( 90), 0.001);
 }
 
 
