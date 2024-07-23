@@ -84,7 +84,7 @@ float BH1750FVI::getLux(void)
   {
     lux *= _angleFactor;
   }
-  //  temperature compensation. 20°C is default.
+  //  temperature compensation. 20 C is default.
   if (_temperature != 20)
   {
     lux *= _tempFactor;
