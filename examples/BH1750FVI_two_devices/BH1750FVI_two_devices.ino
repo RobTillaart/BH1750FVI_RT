@@ -1,5 +1,5 @@
 //
-//    FILE: BH1750FVI_async.ino
+//    FILE: BH1750FVI_two_devices.ino
 //  AUTHOR: Rob Tillaart
 // PURPOSE: demo of BH1750FVI lux scanner library
 //     URL: https://github.com/RobTillaart/BH1750FVI_RT
