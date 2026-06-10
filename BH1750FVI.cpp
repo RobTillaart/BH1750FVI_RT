@@ -52,7 +52,7 @@ bool BH1750FVI::isConnected()
 
 uint8_t BH1750FVI::getAddress()
 {
-  _return _address;
+  return _address;
 }
 
 
